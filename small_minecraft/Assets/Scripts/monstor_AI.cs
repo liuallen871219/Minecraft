@@ -6,6 +6,7 @@ public class monstor_AI : MonoBehaviour {
     public GameObject player;
     public GameObject self;
     public Rigidbody monstor;
+    public AudioSource sound;
     public int speed = 10;
     public int hp = 5;
 	// Use this for initialization
@@ -13,6 +14,7 @@ public class monstor_AI : MonoBehaviour {
         monstor = GetComponent<Rigidbody>();
         self = GetComponent<GameObject>();
         player = GameObject.Find("Viking_Sword");
+        sound = GetComponent<AudioSource>();
 	}
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class monstor_AI : MonoBehaviour {
     {
         hp--;
         monstor.AddForce(player.transform.forward * 1500);
-        
+        sound.Play();
     }
 }
 

@@ -43,6 +43,7 @@ public class Controller : MonoBehaviour
             GetComponent<Rigidbody>().freezeRotation = true;
             animator = GetComponent<Animator>();
         }
+        sound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -137,18 +138,21 @@ public class Controller : MonoBehaviour
                     if(add_item.select_material_name == "grass_item" && add_item.grass_count > 0)
                     {
                         blockGO.GetComponent<MeshRenderer>().material = grass;
+                        sound.Play();
                         blockGO.transform.position = ray_cast_hit.point + new Vector3(0, 0.5f, 0);
                         add_item.grass_count--;
                     }
                     else if (add_item.select_material_name == "dirt_item" && add_item.dirt_count > 0)
                     {
                         blockGO.GetComponent<MeshRenderer>().material = dirt;
+                        sound.Play();
                         blockGO.transform.position = ray_cast_hit.point + new Vector3(0, 0.5f, 0);
                         add_item.dirt_count--;
                     }
                     else if (add_item.select_material_name == "wood_item" && add_item.wood_count > 0)
                     {
                         blockGO.GetComponent<MeshRenderer>().material = wood;
+                        sound.Play();
                         blockGO.transform.position = ray_cast_hit.point + new Vector3(0, 0.5f, 0);
                         add_item.wood_count--;
                     }
@@ -197,7 +201,8 @@ public class Controller : MonoBehaviour
     public Material wood;
     public Animator animator;
     public GameObject block;
-
+    public AudioSource sound;
+    public AudioClip[] audios;
 
 
 
