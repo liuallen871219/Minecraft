@@ -69,7 +69,7 @@ public class Controller : MonoBehaviour
         {
 
             transform.position = transform.position + speed * Time.deltaTime * (Quaternion.Euler(0, 180, 0) * transform.forward);
-            animator.SetFloat("speed", 0.2f);
+            animator.SetFloat("speed", -0.2f);
         }
         if (Input.GetKey(KeyCode.A))
         {
