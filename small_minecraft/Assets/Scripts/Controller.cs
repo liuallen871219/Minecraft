@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Collider))]
-//[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class Controller : MonoBehaviour
 {
 
@@ -40,6 +41,7 @@ public class Controller : MonoBehaviour
         if (GetComponent<Rigidbody>())
         {
             GetComponent<Rigidbody>().freezeRotation = true;
+            animator = GetComponent<Animator>();
         }
     }
 
@@ -48,7 +50,7 @@ public class Controller : MonoBehaviour
         
         /* 鎖定視角 */
         Cursor.lockState = CursorLockMode.Locked;
-
+        animator.SetFloat("speed", 0f);
 
         /* 偵測人物y座標位置 < -10 則會回到y = 0*/
 
@@ -61,19 +63,23 @@ public class Controller : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             transform.position = transform.position + speed * Time.deltaTime * transform.forward;
+            animator.SetFloat("speed", 0.2f);
         }
         if (Input.GetKey(KeyCode.S))
         {
 
             transform.position = transform.position + speed * Time.deltaTime * (Quaternion.Euler(0, 180, 0) * transform.forward);
+            animator.SetFloat("speed", 0.2f);
         }
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = transform.position + speed * Time.deltaTime * (Quaternion.Euler(0, -90, 0) * transform.forward);
+            animator.SetFloat("speed", 0.2f);
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = transform.position + speed * Time.deltaTime * (Quaternion.Euler(0, 90, 0) * transform.forward);
+            animator.SetFloat("speed", 0.2f);
         }
         //跳躍
         if (Input.GetKey(KeyCode.Space) && is_jump == false)
@@ -110,7 +116,7 @@ public class Controller : MonoBehaviour
                         material_name = "dirt(Instance)";
                     }
                     //Debug.Log(material_name);
-                    if (ray_cast_hit.collider.gameObject.name != "monstor")
+                    if (ray_cast_hit.collider.gameObject.name != "monstor(Clone)")
                     {
                         Destroy(ray_cast_hit.collider.gameObject);
                         return;
@@ -189,7 +195,7 @@ public class Controller : MonoBehaviour
     public Material grass;
     public Material dirt;
     public Material wood;
-
+    public Animator animator;
     public GameObject block;
 
 
