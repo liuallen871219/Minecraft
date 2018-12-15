@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\exit_btn.cs" />
      <Compile Include="Assets\Scripts\frame_generator.cs" />
      <Compile Include="Assets\Scripts\grass_generator.cs" />
+     <Compile Include="Assets\Scripts\help_btn.cs" />
      <Compile Include="Assets\Scripts\monstor_AI.cs" />
      <Compile Include="Assets\Scripts\MouseView.cs" />
      <Compile Include="Assets\Scripts\start_btn.cs" />

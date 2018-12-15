@@ -14,7 +14,7 @@ public class dayLight : MonoBehaviour {
 	public int rotate_speed=5;
 	// Update is called once per frame
 	void Update () {
-        transform.RotateAround(Vector3.zero,Vector3.right,rotate_speed*Time.deltaTime);
+        transform.Rotate(new Vector3(rotate_speed, 0, 0)*Time.deltaTime);
         //Debug.Log(transform.eulerAngles);
         if(!(transform.eulerAngles.x < 360 && transform.eulerAngles.x > 270))
         {
@@ -24,6 +24,15 @@ public class dayLight : MonoBehaviour {
             }
             monstor_list.Clear();
         }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            rotate_speed = 20;
+        }
+        if (Input.GetKeyUp(KeyCode.F4))
+        {
+            rotate_speed = 5;
+        }
+
     }
     public void generateMonstor()
     {
@@ -36,6 +45,10 @@ public class dayLight : MonoBehaviour {
             monstor_list.Add(clone);
             Debug.Log("monstor appear");
         }
-       
+        if (Input.GetKey(KeyCode.F4))
+        {
+            transform.rotation = Quaternion.Euler(180, 0, 0) * transform.rotation;
+        }
+
     }
 }

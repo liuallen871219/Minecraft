@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Collider))]
@@ -33,7 +34,7 @@ public class Controller : MonoBehaviour
 
     void Awake()
     {
-
+        
     }
     // Use this for initialization
     void Start()
@@ -47,8 +48,7 @@ public class Controller : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    {     
         /* 鎖定視角 */
         Cursor.lockState = CursorLockMode.Locked;
         animator.SetFloat("speed", 0f);
@@ -61,6 +61,18 @@ public class Controller : MonoBehaviour
             rig.velocity = new Vector3(0, 0, 0);
         }
         //移動
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            add_item.grass_count += 100;
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            add_item.dirt_count += 100;
+        }
+        if (Input.GetKeyDown(KeyCode.F3 ))
+        {
+            add_item.wood_count += 100;
+        }
         if (Input.GetKey(KeyCode.W))
         {
             transform.position = transform.position + speed * Time.deltaTime * transform.forward;
@@ -203,6 +215,9 @@ public class Controller : MonoBehaviour
     public GameObject block;
     public AudioSource sound;
     public AudioClip[] audios;
+    [SerializeField]Transform hpPanel;
+    public int hp = 4;
+    public GameObject img;
 
 
 
@@ -214,6 +229,16 @@ public class Controller : MonoBehaviour
         {
             is_jump = false;
             //Debug.Log("yes");
+        }
+        if(c.collider.gameObject.name=="monstor(Clone)")
+        {
+
+            if (hp >= 0)
+            {
+                hpPanel.GetChild(hp--).GetComponent<Image>().enabled = false;
+                Debug.Log(hp);
+            }
+            
         }
         //Debug.Log(c.transform.name);
     }
