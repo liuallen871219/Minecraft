@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour
         }
         sound = GetComponent<AudioSource>();
     }
-
+   
     void Update()
     {     
         /* 鎖定視角 */
@@ -76,6 +76,7 @@ public class Controller : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             transform.position = transform.position + speed * Time.deltaTime * transform.forward;
+            //rig.MovePosition(transform.position + speed * Time.deltaTime * transform.forward);
             animator.SetFloat("speed", 0.2f);
         }
         if (Input.GetKey(KeyCode.S))
@@ -151,7 +152,7 @@ public class Controller : MonoBehaviour
                     {
                         blockGO.GetComponent<MeshRenderer>().material = grass;
                         sound.Play();
-                        blockGO.transform.position = ray_cast_hit.point + new Vector3(0, 0.5f, 0);
+                        blockGO.transform.position = new Vector3(ray_cast_hit.point.x, Mathf.Ceil(ray_cast_hit.point.y), ray_cast_hit.point.z);
                         add_item.grass_count--;
                     }
                     else if (add_item.select_material_name == "dirt_item" && add_item.dirt_count > 0)
@@ -216,8 +217,9 @@ public class Controller : MonoBehaviour
     public AudioSource sound;
     public AudioClip[] audios;
     [SerializeField]Transform hpPanel;
-    public int hp = 4;
+    public static int hp = 4;
     public GameObject img;
+    public bool hit = false;
 
 
 
@@ -233,13 +235,24 @@ public class Controller : MonoBehaviour
         if(c.collider.gameObject.name=="monstor(Clone)")
         {
 
-            if (hp >= 0)
+            if (hp >= 0 && hit == false)
             {
                 hpPanel.GetChild(hp--).GetComponent<Image>().enabled = false;
                 Debug.Log(hp);
+                hit = true;
+                Invoke("wudi_state", 3f);
+            }
+            else if(hp < 0)
+            {
+                SceneManager.LoadScene(4);
             }
             
         }
         //Debug.Log(c.transform.name);
     }
+    void wudi_state()
+    {
+        hit = false;
+    }
+
 }

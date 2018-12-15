@@ -9,6 +9,7 @@ public class start_btn : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData e)
     {
+        Controller.hp = 4;
         SceneManager.LoadScene(1);
     }
 }

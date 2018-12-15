@@ -14,9 +14,9 @@ public class dayLight : MonoBehaviour {
 	public int rotate_speed=5;
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(new Vector3(rotate_speed, 0, 0)*Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.right, rotate_speed * Time.deltaTime);
         //Debug.Log(transform.eulerAngles);
-        if(!(transform.eulerAngles.x < 360 && transform.eulerAngles.x > 270))
+        if (!(transform.eulerAngles.x < 360 && transform.eulerAngles.x > 270))
         {
             foreach(GameObject monstor in monstor_list)
             {
