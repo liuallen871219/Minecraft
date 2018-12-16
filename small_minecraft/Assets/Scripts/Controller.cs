@@ -202,7 +202,10 @@ public class Controller : MonoBehaviour
 
         /* 按 Esc 回主畫面 */
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(0);
+        }
     }
 
 
